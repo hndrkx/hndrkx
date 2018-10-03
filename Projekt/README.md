@@ -1,5 +1,6 @@
 OBS!!
 OM DU KÖR LINUX/MACOS ÄNDRA FÖLJANDE PÅ RAD 42
+
 Password.seek(userlength + 2)
     --->>    
 Password.seek(userlength + 1)
