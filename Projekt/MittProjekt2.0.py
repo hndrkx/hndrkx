@@ -126,68 +126,57 @@ def anothercard(hand):  # Denna funktionen är om man vill ta ett till kort
     return hand     # Och vi returnerar sedan hand.
 
 
+def wincoins():
+    with open(menuLogin + '.txt',
+              'w+') as checkBalance:  # Dessa ändrar värdet på credits i användarens textfil. Om man vinner får man mer credits, och om man förlorar tar den bort credits.
+        newbalance = realbalance + bet
+        checkBalance.seek(0)
+        checkBalance.write(menuLogin + "\n")
+        checkBalance.write(menuPassword + "\n")
+        checkBalance.write(str(newbalance))
+
+
+def losscoins():
+    with open(menuLogin + '.txt', 'w+') as checkBalance:  # Dessa ändrar värdet på credits i användarens textfil. Om man vinner får man mer credits, och om man förlorar tar den bort credits.
+        newbalance = realbalance - bet
+        checkBalance.seek(0)
+        checkBalance.write(menuLogin + "\n")
+        checkBalance.write(menuPassword + "\n")
+        checkBalance.write(str(newbalance))
+
+
 def score(dealer_hand, player_hand):  # Här kommer funktinen som skriver ut resultatet beroende på händerna.
     if total(player_hand) == 21:
         print("The dealer has", *dealer_hand, "for a total of " + str(total(dealer_hand)))
         print("You have", *player_hand, "for a total of " + str(total(player_hand)))
         print("Congratulations! You got a Blackjack!")
         print("You win", bet, "\n")
-        with open(menuLogin + '.txt', 'w+') as checkBalance:  # Dessa ändrar värdet på credits i användarens textfil. Om man vinner får man mer credits, och om man förlorar tar den bort credits.
-            newbalance = realbalance + bet
-            checkBalance.seek(0)
-            checkBalance.write(menuLogin+"\n")
-            checkBalance.write(menuPassword+"\n")
-            checkBalance.write(str(newbalance))
+        wincoins()
     elif total(dealer_hand) == 21:
         print("The dealer has", *dealer_hand, "for a total of " + str(total(dealer_hand)))
         print("You have", *player_hand, "for a total of " + str(total(player_hand)))
         print("Sorry, you lose. The dealer got a blackjack. You lost", bet, "\n")
-        with open(menuLogin + '.txt', 'w+') as checkBalance:
-            newbalance = realbalance - bet
-            checkBalance.seek(0)
-            checkBalance.write(menuLogin+"\n")
-            checkBalance.write(menuPassword+"\n")
-            checkBalance.write(str(newbalance))
+        losscoins()
     elif total(player_hand) > 21:
         print("The dealer has", *dealer_hand, "for a total of " + str(total(dealer_hand)))
         print("You have", *player_hand, "for a total of " + str(total(player_hand)))
         print("Sorry. You busted. You lost", bet, "\n")
-        with open(menuLogin + '.txt', 'w+') as checkBalance:
-            newbalance = realbalance - bet
-            checkBalance.seek(0)
-            checkBalance.write(menuLogin+"\n")
-            checkBalance.write(menuPassword+"\n")
-            checkBalance.write(str(newbalance))
+        losscoins()
     elif total(dealer_hand) > 21:
         print("The dealer has", *dealer_hand, "for a total of " + str(total(dealer_hand)))
         print("You have", *player_hand, "for a total of " + str(total(player_hand)))
         print("Dealer busts. You win", bet, "\n")
-        with open(menuLogin + '.txt', 'w+') as checkBalance:
-            newbalance = realbalance + bet
-            checkBalance.seek(0)
-            checkBalance.write(menuLogin+"\n")
-            checkBalance.write(menuPassword+"\n")
-            checkBalance.write(str(newbalance))
+        wincoins()
     elif total(player_hand) < total(dealer_hand):
         print("The dealer has", *dealer_hand, "for a total of " + str(total(dealer_hand)))
         print("You have", *player_hand, "for a total of " + str(total(player_hand)))
         print("The dealer has a higher hand, you lost", bet, "\n")
-        with open(menuLogin + '.txt', 'w+') as checkBalance:
-            newbalance = realbalance - bet
-            checkBalance.seek(0)
-            checkBalance.write(menuLogin+"\n")
-            checkBalance.write(menuPassword+"\n")
-            checkBalance.write(str(newbalance))
+        losscoins()
     elif total(player_hand) > total(dealer_hand):
         print("The dealer has", *dealer_hand, "for a total of " + str(total(dealer_hand)))
         print("You have", *player_hand, "for a total of " + str(total(player_hand)))
         print("Congratulations. Your hand is higher then the dealer. You win", bet, "\n")
-        with open(menuLogin + '.txt', 'w+') as checkBalance:
-            newbalance = realbalance + bet
-            checkBalance.seek(0)
-            checkBalance.write(menuLogin+"\n")
-            checkBalance.write(menuPassword+"\n")
-            checkBalance.write(str(newbalance))
+        wincoins()
 
 
 def depositmoremoney(amount):  # Här är funktionen för att lägga till mer credits till sitt konto
@@ -241,16 +230,16 @@ while menuUserLoop:
                                 if hitorstand == "2" and total(player_hand) != 21:  # Om man väljer att stanna stå breakar vi loopen.
                                     print('You chose to stand.')
                                     break
-                            if total(player_hand) < 22: # Om spelarens hand är lägre än 22
+                            if total(player_hand) < 22:  # Om spelarens hand är lägre än 22
                                 while total(dealer_hand) < 17:  # Så får dealern dra kort så länge handen är lägre än 17
                                     anothercard(dealer_hand)
-                                score(dealer_hand, player_hand) # Vi printar sedan ut poängen med funktionen score
+                                score(dealer_hand, player_hand)  # Vi printar sedan ut poängen med funktionen score
                                 break
                             else:
-                                score(dealer_hand, player_hand) # Om spelarens hand är hägre än 22 så drar inte dealern några kort utan poängen printas ut istället
+                                score(dealer_hand, player_hand)  # Om spelarens hand är hägre än 22 så drar inte dealern några kort utan poängen printas ut istället
                                 break
-                        elif yourChoice == "2": # Om man väljer att stanna direkt.
-                            while total(dealer_hand) < 17: # Och om dealerns hand är lägre än 17 så kommer dealern dra kort.
+                        elif yourChoice == "2":  # Om man väljer att stanna direkt.
+                            while total(dealer_hand) < 17:  # Och om dealerns hand är lägre än 17 så kommer dealern dra kort.
                                 anothercard(dealer_hand)
                             score(dealer_hand, player_hand)
                             break
