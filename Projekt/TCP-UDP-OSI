@@ -1,0 +1,17 @@
+Skillnaden mellan TCP / UDP och även OSI modellen.
+
+Alla tre är olika nätverksprotokoll för att kommunicera över ett nätverk.
+OSI modellen är liknande TCP men med flera lager, huvudsyftet med OSI och TCP är densamma.
+
+Transmission Controll Protocol (TCP):
+TCP är huvudsakligen användbart när man behöver en tillförlitlig anslutning mellan noderna. 
+Innan kommunikation kan upprättas så måste båda parter vara anslutna, 
+det går alltså inte att kommunisera om det inte finns någon att kommunicera med, 
+detta kallas connection-oriented communication, detta gör även att datan levereras i samma ordning som den skickades.
+
+User Datagram Protocol(UDP):
+UDP är användbart när det inte krävs att datan levereras i samma ordning som den skickas. 
+UDP är dock inte lika säkert som TCP just på grund av detta, 
+när man skickar data via UDP så finns det inga lager som granskar datan och kontroller att allt kommer fram. 
+Eftersom UDP inte kräver att datan skickas i samma ordning är UDP snabbare än TCP och väldigt användbart för tex VoIP
+eller andra applikation som kräver ”real-time transmission”.
