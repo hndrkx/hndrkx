@@ -6,6 +6,7 @@ pymysql paketet
 
 
 
+
 För att kunna använda programmet följ hänvisningar:
 
 Ändra följande rader (9-12):
