@@ -10,7 +10,7 @@ För att kunna använda programmet följ hänvisningar:
 
 Ändra följande rader (6-9):
 
-db = pymysql.connect(host='localhost',
+					db = pymysql.connect(host='localhost',
 
                                  user='DITT ANVÄNDARNAMN',
 								 
