@@ -1,6 +1,10 @@
 Krav för att kunna använda programmet:
+
 mySQL databasserver
+
 pymysql paketet
+
+
 
 För att kunna använda programmet följ hänvisningar:
 
